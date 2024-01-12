@@ -13,6 +13,7 @@ import './App.css';
 
 function App() {
 
+  //an array of product objects to work locally
   const [products, setProducts] = useState ([
     {
       "id": 1,
@@ -93,7 +94,7 @@ function App() {
     },
     {
       "name": "friendster",
-      "description": "monthly subscription to a pocket-sized friend. Participate in this wonderful reabilitation program for convicts world-wide. ",
+      "description": "monthly subscription to a pocket-sized friend. Participate in this wonderful reabilitation program for convicts world-wide.",
       "price": "20.99",
       "category": "technology",
       "id": 15
@@ -123,6 +124,7 @@ function App() {
   const [showAddProduct, setShowAddProduct] = useState(false)
 
 
+  //paths orchestrate what the modal shows. 
   return (
     <BrowserRouter>
       <div>
@@ -156,25 +158,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-
-/*   return (
-    <BrowserRouter>
-      <div>
-        <div>
-          <Nav/>
-          <Header  toggleForm={() => setShowAddProduct(!showAddProduct)} showAdd={showAddProduct}/>
-          { showAddProduct && <AddProduct onAdd={addProduct}/>}
-          <Routes>
-            <Route path='/' element={<ManyProducts Products products={products} onDelete={deleteProduct}/>}/>
-            <Route path='/product/:id' element={<Product products={products} setShowAddProduct={setShowAddProduct}/>} />
-            <Route path='/about' element={<About setShowAddProduct={setShowAddProduct}/>}/>
-            <Route path='/edit/:id' element={<EditProduct products={products}/>}/>
-          </Routes>
-          <Footer/>
-        </div>
-      </div>
-    </BrowserRouter>
-  ); */
 }
 
 export default App;
