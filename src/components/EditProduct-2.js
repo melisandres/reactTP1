@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const EditProduct = ({ onUpdate, onCancel }) => {
+const EditProduct = ({ onUpdate }) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
     const navigate = useNavigate();
@@ -129,9 +129,6 @@ const EditProduct = ({ onUpdate, onCancel }) => {
                     />
                 </div>
                 <input type="submit" value="updateProduct" />
-{/*                 <button type="button" onClick={onCancel}>
-                    Cancel
-                </button> */}
             </form>
             <hr/>
             <div className='info'>
