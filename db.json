@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "auto-shovel",
+      "description": "Will shovel for you. Snow has never been funner--or lighter. Perfect x-mas gift for colder climates.",
+      "price": "299.00",
+      "category": "magical"
+    },
+    {
+      "id": 2,
+      "name": "winter sandals",
+      "description": "Will keep your feet toasty in cold times. Will melt snow at a two inch radius. Stop using if your feet turn black.",
+      "price": "49.98",
+      "category": "modern-day marvels"
+    },
+    {
+      "name": "self-repairing cake",
+      "description": "Will make itself whole. Great for the holidays. If used according to guidelines, will render up to 50 servings per day, for up to a whole week of festivities. Wait at least 10 minutes between servings. ",
+      "price": "99.95",
+      "category": "magical",
+      "id": 3
+    },
+    {
+      "name": "monster mania",
+      "description": "A party in a box. Play your cards right, and you might get invited.",
+      "price": "5.98",
+      "category": "magical",
+      "id": 4
+    },
+    {
+      "name": "smoke screen",
+      "description": "non permeable nano-thin screen, made of subzero diaphenous smoke particles. Perfect for confusing onlookers.",
+      "price": "29.98",
+      "category": "modern-day marvels",
+      "id": 5
+    },
+    {
+      "name": "cloning device",
+      "description": "clone your favorite pet, your favorite parent, your favorite child. Do so in the comfort and secrecy of your own home, for the pleasure and amusement of those you love. ",
+      "price": "7000",
+      "category": "modern-day marvels",
+      "id": 6
+    },
+    {
+      "name": "biolin",
+      "description": "a violin made of live tissue, created to combine the melodic enchantment of songbirds, the beauty of resonating strings, and the complexity of polymorphic engineering. ",
+      "price": "700.00",
+      "category": "modern-day marvels",
+      "id": 7
+    },
+    {
+      "name": "field mouse",
+      "description": "A mouse that hunts, in the field, for you. Yield: 2 grams of locally grown seeds and/or shiny objects a day. ",
+      "price": "9.99",
+      "category": "magical",
+      "id": 10
+    },
+    {
+      "name": "glitter an gold",
+      "description": "looks like glitter, acts like gold. ",
+      "price": "8.99",
+      "category": "magical",
+      "id": 11
+    },
+    {
+      "name": "shimmering ",
+      "description": "an adjective you can use anywhere you like. forever.",
+      "price": "99.99",
+      "category": "magical",
+      "id": 13
+    },
+    {
+      "name": "fur",
+      "description": "it will grow on your winter-cold body and keep you warm",
+      "price": "90.99",
+      "category": "magical",
+      "id": 14
+    },
+    {
+      "name": "friendster",
+      "description": "monthly subscription to a pocket-sized friend. Participate in this wonderful reabilitation program for convicts world-wide. ",
+      "price": "20.99",
+      "category": "technology",
+      "id": 15
+    }
+  ]
+}
