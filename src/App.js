@@ -1,7 +1,6 @@
 import Nav from './components/Nav'
 import Header from './components/Header'
 import ManyProducts from './components/ManyProducts'
-import AddProduct from './components/AddProduct'
 import Footer from './components/Footer'
 import { useState } from 'react'
 import About from './components/About'
