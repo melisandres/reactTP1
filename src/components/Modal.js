@@ -4,7 +4,7 @@ import EditProduct from './EditProduct';
 import Product from './Product';
 import AddProduct from './AddProduct';
 
-const Modal = ({onUpdate, onCancel, products, onAdd}) => {
+const Modal = ({onUpdate, products, onAdd}) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -16,11 +16,11 @@ const Modal = ({onUpdate, onCancel, products, onAdd}) => {
                         </> ;
             case location.pathname === '/create':
                 return  <>
-                            <AddProduct onAdd={onAdd} onCancel={onCancel} />
+                            <AddProduct onAdd={onAdd} />
                         </> ;
             case location.pathname.startsWith('/edit/'):
                 return  <>
-                            <EditProduct products={products} onUpdate={onUpdate} onCancel={onCancel} />
+                            <EditProduct products={products} onUpdate={onUpdate} />
                         </> ;
             default:
                 return 'nothing';
