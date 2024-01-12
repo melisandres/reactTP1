@@ -2,12 +2,10 @@ import Nav from './components/Nav'
 import Header from './components/Header'
 import ManyProducts from './components/ManyProducts'
 import AddProduct from './components/AddProduct'
-import Product from './components/Product'
 import Footer from './components/Footer'
 import { useState } from 'react'
 import About from './components/About'
-import EditProduct from './components/EditProduct'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import CustomModal from './components/CustomModal'
 import './App.css';
 
@@ -121,34 +119,32 @@ function App() {
     );
   };
 
-  const [showAddProduct, setShowAddProduct] = useState(false)
 
-
-  //paths orchestrate what the modal shows. 
+  //paths orchestrate what the modal shows: 
+  //create, edit, and show individual products
   return (
     <BrowserRouter>
       <div>
         <div>
           <Nav/>
-          <Header  toggleForm={() => setShowAddProduct(!showAddProduct)} showAdd={showAddProduct}/>
-          { showAddProduct && <AddProduct onAdd={addProduct}/>}
+          <Header/>
           <Routes>
             <Route path='/' element={<ManyProducts products={products} onDelete={deleteProduct}/>}/>
             <Route path='/create' element={
               <>
-                <CustomModal onAdd={addProduct} onCancel={() => setShowAddProduct(false)} setShowAddProduct={setShowAddProduct} />
+                <CustomModal onAdd={addProduct} />
                 <ManyProducts products={products} onDelete={deleteProduct}/>
               </> }>
             </Route>
             <Route path='/product/:id' element={
               <>
-                <CustomModal products={products} onDelete={deleteProduct} setShowAddProduct={setShowAddProduct} />
+                <CustomModal products={products} onDelete={deleteProduct} />
                 <ManyProducts products={products} onDelete={deleteProduct} />
               </>} />
-            <Route path='/about' element={<About setShowAddProduct={setShowAddProduct}/>}/>
+            <Route path='/about' element={<About/>}/>
             <Route path='/edit/:id'element={
               <>
-                <CustomModal products={products} onUpdate={updateProduct} onCancel={() => setShowAddProduct(false)} setShowAddProduct={setShowAddProduct} />
+                <CustomModal products={products} onUpdate={updateProduct}/>
                 <ManyProducts products={products} onDelete={deleteProduct}/>
               </> }>
             </Route>

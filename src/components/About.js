@@ -1,10 +1,4 @@
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
-
-const About = ({setShowAddProduct}) => {
-    useEffect(() => {
-        setShowAddProduct(false);
-      }, [setShowAddProduct]);
+const About = () => {
 
     return(
         <div className='about'>

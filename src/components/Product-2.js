@@ -1,8 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import EditProduct from './EditProduct';
 
-const Product = ({ setShowAddProduct, onDelete, onClose, deleteAndClose}) => {
+const Product = ({ onDelete, onClose, deleteAndClose}) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
 
@@ -15,7 +14,6 @@ const Product = ({ setShowAddProduct, onDelete, onClose, deleteAndClose}) => {
     //you are also getting your product with a fetch... you will not do this 
     //when you are getting your data from the server... 
     useEffect(() => {
-        setShowAddProduct(false)
         const fetchProduct = async () => {
           try {
             const response = await fetch(`http://localhost:5000/products/${id}`);
@@ -26,7 +24,7 @@ const Product = ({ setShowAddProduct, onDelete, onClose, deleteAndClose}) => {
           }
         };
         fetchProduct();
-      }, [setShowAddProduct, id]); 
+      }, [id]); 
     //const task = tasks.find(item => item.id === id)
     return(
         <>
@@ -43,9 +41,7 @@ const Product = ({ setShowAddProduct, onDelete, onClose, deleteAndClose}) => {
             </div>
             <footer>
               <Link className="modal-button" to={`/edit/${product.id}`}>Modify</Link>
-              <span className="modal-button" onClick={() => deleteAndClose(product.id)}>
-              Delete
-              </span>
+              <span className="modal-button" onClick={() => deleteAndClose(product.id)}>Delete</span>
             </footer>
         </>
     )

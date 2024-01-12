@@ -81,33 +81,29 @@ function App() {
     };
 
 
-
-  const [showAddProduct, setShowAddProduct] = useState(false)
-
   return (
     <BrowserRouter>
       <div>
         <div>
           <Nav/>
-          <Header  toggleForm={() => setShowAddProduct(!showAddProduct)} showAdd={showAddProduct}/>
-          { showAddProduct && <AddProduct onAdd={addProduct}/>}
+          <Header  />
           <Routes>
             <Route path='/' element={<ManyProducts products={products} onDelete={deleteProduct}/>}/>
             <Route path='/create' element={
               <>
-                <CustomModal onAdd={addProduct} onCancel={() => setShowAddProduct(false)} setShowAddProduct={setShowAddProduct} />
+                <CustomModal onAdd={addProduct} />
                 <ManyProducts products={products} onDelete={deleteProduct}/>
               </> }>
             </Route>
             <Route path='/product/:id' element={
               <>
-                <CustomModal onDelete={deleteProduct} setShowAddProduct={setShowAddProduct} />
+                <CustomModal onDelete={deleteProduct} />
                 <ManyProducts products={products} onDelete={deleteProduct} />
               </>} />
-            <Route path='/about' element={<About setShowAddProduct={setShowAddProduct}/>}/>
+            <Route path='/about' element={<About />}/>
             <Route path='/edit/:id'element={
               <>
-                <CustomModal products={products} onUpdate={updateProduct} onCancel={() => setShowAddProduct(false)} setShowAddProduct={setShowAddProduct} />
+                <CustomModal products={products} onUpdate={updateProduct}/>
                 <ManyProducts products={products} onDelete={deleteProduct}/>
               </> }>
             </Route>

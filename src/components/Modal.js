@@ -3,9 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import EditProduct from './EditProduct';
 import Product from './Product';
 import AddProduct from './AddProduct';
-import { FaTimes, FaEye, FaPencilAlt } from 'react-icons/fa'
 
-const Modal = ({onUpdate, onCancel, products, setShowAddProduct, onAdd}) => {
+const Modal = ({onUpdate, onCancel, products, onAdd}) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -13,7 +12,7 @@ const Modal = ({onUpdate, onCancel, products, setShowAddProduct, onAdd}) => {
         switch (true) {
             case location.pathname.startsWith('/product/'):
                 return  <>
-                            <Product setShowAddProduct={setShowAddProduct}/>
+                            <Product />
                         </> ;
             case location.pathname === '/create':
                 return  <>

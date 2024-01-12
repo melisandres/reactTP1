@@ -1,17 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
-const Product = ({products, setShowAddProduct, onDelete, onClose, deleteAndClose}) => {
+const Product = ({products, deleteAndClose}) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
 
     useEffect(() => {
-        //setShowAddProduct(false);
         // Find the product in the local state based on the id
         const selectedProduct = products.find((p) => p.id === parseInt(id));
-        console.log(selectedProduct);
         setProduct(selectedProduct || {});
-    }, [setShowAddProduct, id, products]);
+    }, [id, products]);
 
     return(
         <>
