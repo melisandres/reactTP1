@@ -9,7 +9,7 @@ import { FaTimes } from 'react-icons/fa';
 // Set the root node for the modal (for accessibility)
 Modal.setAppElement('#root');
 
-const CustomModal = ({ onDelete, onUpdate, onCancel, products, onAdd }) => {
+const CustomModal = ({ onDelete, onUpdate, products, onAdd }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -33,11 +33,11 @@ const CustomModal = ({ onDelete, onUpdate, onCancel, products, onAdd }) => {
             case location.pathname.startsWith('/product/'):
                 return <Product products={products} deleteAndClose={deleteAndClose} />;
             case location.pathname === '/create':
-                return <AddProduct onAdd={onAdd} onCancel={onCancel} />;
+                return <AddProduct onAdd={onAdd} />;
             case location.pathname.startsWith('/edit/'):
                 return (
                 <>
-                    <EditProduct products={products} onUpdate={onUpdate} onCancel={onCancel} />
+                    <EditProduct products={products} onUpdate={onUpdate} />
                 </>
             );
             default:
@@ -55,7 +55,12 @@ const CustomModal = ({ onDelete, onUpdate, onCancel, products, onAdd }) => {
 
     return (
 
-        <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="modal" contentLabel="Custom Modal">
+        <Modal 
+            isOpen={isModalOpen} 
+            onRequestClose={closeModal} 
+            onAfterClose={() => setIsModalOpen(false)} 
+            className="modal" 
+            contentLabel="Custom Modal">
             <button className="close-modal" type="button" onClick={closeModal}>
                 <FaTimes /> 
             </button>
