@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import EditProduct from './EditProduct';
 import Product from './Product';
 import AddProduct from './AddProduct';
 
 const Modal = ({onUpdate, products, onAdd}) => {
     const location = useLocation();
-    const navigate = useNavigate();
 
     const getDynamicContent = () => {
         switch (true) {

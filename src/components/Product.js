@@ -1,18 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
-const Product = ({ onDelete, onClose, deleteAndClose}) => {
+const Product = ({ deleteAndClose }) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
 
-    // Function to Delete the product and close the modal
-/*     const deleteAndClose = (productId) => {
-      onDelete(productId)
-      onClose()
-    }; */
-
-    //you are also getting your product with a fetch... you will not do this 
-    //when you are getting your data from the server... 
+    //you are also getting your product with a fetch... 
     useEffect(() => {
         const fetchProduct = async () => {
           try {
@@ -25,7 +18,7 @@ const Product = ({ onDelete, onClose, deleteAndClose}) => {
         };
         fetchProduct();
       }, [id]); 
-    //const task = tasks.find(item => item.id === id)
+
     return(
         <>
             <div>

@@ -1,5 +1,4 @@
 import SingleProduct from './SingleProduct'
-import EditProduct from './EditProduct'
 
 
 const ManyProducts = ({products, onDelete}) => {

@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -56,15 +56,6 @@ const EditProduct = ({ onUpdate }) => {
         alert('Please add a price with two decimal places');
         return;
         }
-
-/*         // Call the onUpdate function with the updated product data
-        onUpdate({
-        id: product.id, // Assuming product has an id
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        category: product.category,
-        }); */
 
         // Construct the updated product object
         const updatedProduct = {
