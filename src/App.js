@@ -1,13 +1,10 @@
 import Nav from './components/Nav'
 import Header from './components/Header'
 import ManyProducts from './components/ManyProducts'
-import AddProduct from './components/AddProduct'
-import Product from './components/Product'
 import Footer from './components/Footer'
 import About from './components/About'
-import EditProduct from './components/EditProduct';
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CustomModal from './components/CustomModal'
 import './App.css';
 

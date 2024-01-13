@@ -1,16 +1,31 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
-const Product = ({products, deleteAndClose}) => {
+const Product = ({ onDelete, onClose, deleteAndClose}) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
 
-    useEffect(() => {
-        // Find the product in the local state based on the id
-        const selectedProduct = products.find((p) => p.id === parseInt(id));
-        setProduct(selectedProduct || {});
-    }, [id, products]);
+    // Function to Delete the product and close the modal
+/*     const deleteAndClose = (productId) => {
+      onDelete(productId)
+      onClose()
+    }; */
 
+    //you are also getting your product with a fetch... you will not do this 
+    //when you are getting your data from the server... 
+    useEffect(() => {
+        const fetchProduct = async () => {
+          try {
+            const response = await fetch(`http://localhost:5000/products/${id}`);
+            const data = await response.json();
+            setProduct(data)
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+        fetchProduct();
+      }, [id]); 
+    //const task = tasks.find(item => item.id === id)
     return(
         <>
             <div>
@@ -26,9 +41,7 @@ const Product = ({products, deleteAndClose}) => {
             </div>
             <footer>
               <Link className="modal-button" to={`/edit/${product.id}`}>Modify</Link>
-              <span className="modal-button" onClick={() => deleteAndClose(product.id)}>
-              Delete
-              </span>
+              <span className="modal-button" onClick={() => deleteAndClose(product.id)}>Delete</span>
             </footer>
         </>
     )

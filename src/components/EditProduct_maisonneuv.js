@@ -1,8 +1,8 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const EditProduct = ({ onUpdate }) => {
+const EditProduct = ({ onUpdate, products }) => {
     const { id } = useParams();
     const [product, setProduct] = useState([])
     const navigate = useNavigate();
@@ -10,17 +10,9 @@ const EditProduct = ({ onUpdate }) => {
     //you have to use something other than a fetch if you are grabbing 
     //your product from the app.js
     useEffect(() => {
-        const fetchProduct = async () => {
-          try {
-            const response = await fetch(`http://localhost:5000/products/${id}`);
-            const data = await response.json();
-            setProduct(data)
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-        fetchProduct();
-    }, [id]); 
+        const foundProduct = products.find((p) => p.id === parseInt(id));
+        setProduct(foundProduct || {});
+      }, [id, products]);
 
     // State to manage form fields
     const [name, setName] = useState('');
@@ -57,14 +49,14 @@ const EditProduct = ({ onUpdate }) => {
         return;
         }
 
-/*         // Call the onUpdate function with the updated product data
+        // Call the onUpdate function with the updated product data
         onUpdate({
         id: product.id, // Assuming product has an id
         name: product.name,
         description: product.description,
         price: product.price,
         category: product.category,
-        }); */
+        });
 
         // Construct the updated product object
         const updatedProduct = {
