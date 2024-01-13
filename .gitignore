@@ -10,6 +10,7 @@
 
 # production
 /build
+/imagine
 
 # misc
 .DS_Store

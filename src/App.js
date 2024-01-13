@@ -1,132 +1,92 @@
 import Nav from './components/Nav'
 import Header from './components/Header'
 import ManyProducts from './components/ManyProducts'
+import AddProduct from './components/AddProduct'
+import Product from './components/Product'
 import Footer from './components/Footer'
-import { useState } from 'react'
 import About from './components/About'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import EditProduct from './components/EditProduct';
+import { useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import CustomModal from './components/CustomModal'
 import './App.css';
 
-function App() {
 
-  //an array of product objects to work locally
-  const [products, setProducts] = useState ([
-    {
-      "id": 1,
-      "name": "auto-shovel",
-      "description": "Will shovel for you. Snow has never been funner--or lighter. Perfect x-mas gift for colder climates.",
-      "price": "299.00",
-      "category": "magical"
-    },
-    {
-      "id": 2,
-      "name": "winter sandals",
-      "description": "Will keep your feet toasty in cold times. Will melt snow at a two inch radius. Stop using if your feet turn black.",
-      "price": "49.98",
-      "category": "modern-day marvels"
-    },
-    {
-      "name": "self-repairing cake",
-      "description": "Will make itself whole. Great for the holidays. If used according to guidelines, will render up to 50 servings per day, for up to a whole week of festivities. Wait at least 10 minutes between servings. ",
-      "price": "99.95",
-      "category": "magical",
-      "id": 3
-    },
-    {
-      "name": "monster mania",
-      "description": "A party in a box. Play your cards right, and you might get invited.",
-      "price": "5.98",
-      "category": "magical",
-      "id": 4
-    },
-    {
-      "name": "smoke screen",
-      "description": "non permeable nano-thin screen, made of subzero diaphenous smoke particles. Perfect for confusing onlookers.",
-      "price": "29.98",
-      "category": "modern-day marvels",
-      "id": 5
-    },
-    {
-      "name": "cloning device",
-      "description": "clone your favorite pet, your favorite parent, your favorite child. Do so in the comfort and secrecy of your own home, for the pleasure and amusement of those you love. ",
-      "price": "7000",
-      "category": "modern-day marvels",
-      "id": 6
-    },
-    {
-      "name": "biolin",
-      "description": "a violin made of live tissue, created to combine the melodic enchantment of songbirds, the beauty of resonating strings, and the complexity of polymorphic engineering. ",
-      "price": "700.00",
-      "category": "modern-day marvels",
-      "id": 7
-    },
-    {
-      "name": "field mouse",
-      "description": "A mouse that hunts, in the field, for you. Yield: 2 grams of locally grown seeds and/or shiny objects a day. ",
-      "price": "9.99",
-      "category": "magical",
-      "id": 10
-    },
-    {
-      "name": "glitter an gold",
-      "description": "looks like glitter, acts like gold. ",
-      "price": "8.99",
-      "category": "magical",
-      "id": 11
-    },
-    {
-      "name": "shimmering ",
-      "description": "an adjective you can use anywhere you like. forever.",
-      "price": "99.99",
-      "category": "magical",
-      "id": 13
-    },
-    {
-      "name": "fur",
-      "description": "it will grow on your winter-cold body and keep you warm",
-      "price": "90.99",
-      "category": "magical",
-      "id": 14
-    },
-    {
-      "name": "friendster",
-      "description": "monthly subscription to a pocket-sized friend. Participate in this wonderful reabilitation program for convicts world-wide.",
-      "price": "20.99",
-      "category": "technology",
-      "id": 15
-    }
+
+
+function App() {
+  const [products, setProducts] = useState([
   ])
 
-  const deleteProduct = (id) => {
-    setProducts(products.filter((product)=>product.id !==id))
+  const fetchProducts = async (url) => {
+    const res = await fetch(url)
+    const data = await res.json()
+    return data
   }
 
-  const addProduct = (product) => {
-    const lastId = products.length > 0 ? products[products.length - 1].id : 0
-    const id = lastId + 1
-    const newProduct = {id, ...product}
+  //with useEffect it is necessary to pass an empty array at the end
+  //c'est le démarrage, on demande la donnée
+  useEffect(() => {
+    const getProducts = async () => {
+      const productFromServer = await fetchProducts('http://localhost:5000/products')
+      setProducts(productFromServer)
+    }
+    getProducts()
+
+  }, [])
+
+  const deleteProduct = async (id) => {
+    await  fetch(`http://localhost:5000/products/${id}`, {
+      method: 'delete',
+    })
+    setProducts(products.filter((product)=>product.id!==id))
+  }
+
+  const addProduct = async (product) => {
+    const res = await fetch('http://localhost:5000/products', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    })
+
+    const newProduct = await res.json()
     setProducts([...products, newProduct])
-    return newProduct
+    return newProduct;
   }
 
-  const updateProduct = (updatedProduct) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
-      )
-    );
-  };
+    const updateProduct = async (updatedProduct) => {
+      // Send a PUT request to update the product on the server
+      const res = await fetch(`http://localhost:5000/products/${updatedProduct.id}`, {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedProduct)
+      });
+    
+      // Check if the request was successful
+      if (res.ok) {
+        // If successful, update the product in the local state
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === updatedProduct.id ? updatedProduct : product
+          )
+        );
+      } else {
+        // If the request was not successful, log an error
+        console.error('Failed to update product');
+      }
+    };
 
 
-  //paths orchestrate what the modal shows: 
-  //create, edit, and show individual products
   return (
     <BrowserRouter>
       <div>
         <div>
           <Nav/>
-          <Header/>
+          <Header  />
           <Routes>
             <Route path='/' element={<ManyProducts products={products} onDelete={deleteProduct}/>}/>
             <Route path='/create' element={
@@ -137,10 +97,10 @@ function App() {
             </Route>
             <Route path='/product/:id' element={
               <>
-                <CustomModal products={products} onDelete={deleteProduct} />
+                <CustomModal onDelete={deleteProduct} />
                 <ManyProducts products={products} onDelete={deleteProduct} />
               </>} />
-            <Route path='/about' element={<About/>}/>
+            <Route path='/about' element={<About />}/>
             <Route path='/edit/:id'element={
               <>
                 <CustomModal products={products} onUpdate={updateProduct}/>
